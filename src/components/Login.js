@@ -1,11 +1,47 @@
 import Header from "./Header";
 import { useState } from "react";
+import { useFormik } from "formik";
 const Login = () => {
   const [isSignInForm, setSignInForm] = useState(true);
 
   const toggleSignInForm = () => {
     setSignInForm(!isSignInForm);
   };
+  const validate = (values) => {
+    const errors = {};
+    if (!values.fullname) {
+      errors.fullname = "Required";
+    } else if (values.fullname.length > 20) {
+      errors.fullname = "Must be 20 characters or less";
+    }
+
+    if (!values.email) {
+      errors.email = "Required";
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+    ) {
+      errors.email = "Invalid email address";
+    }
+
+    if (values.password !== "" && values.password !== values.confirmpassword) {
+      errors.confirmpassword = "Password Should be Same";
+    }
+
+    return errors;
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+      confirmpassword: "",
+      fullname: "",
+    },
+    validate,
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
 
   return (
     <div className="relative flex flex-col items-center justify-center">
@@ -16,36 +52,78 @@ const Login = () => {
           alt="body"
         />
       </div>
-      <form className="w-3/12 absolute flex-col bg-black bg-opacity-80 p-12 text-white rounded-md">
+      <form
+        className="w-3/12 absolute flex-col bg-black bg-opacity-80 p-12 text-white rounded-md"
+        onSubmit={formik.handleSubmit}
+      >
         <h1 className="font-bold text-3xl">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
         {!isSignInForm && (
           <input
+            id="fullname"
+            name="fullname"
+            onChange={formik.handleChange}
+            value={formik.values.fullname}
+            onBlur={formik.handleBlur}
             type="text"
             placeholder="Full Name"
             className="p-4 my-4 w-full bg-gray-800 placeholder:text-gray-500 rounded-md"
           />
         )}
+        {!isSignInForm && formik.touched.fullname && formik.errors.fullname ? (
+          <p className="text-sm text-red-700">{formik.errors.fullname}</p>
+        ) : null}
         <input
+          id="email"
+          name="email"
           type="email"
+          onChange={formik.handleChange}
+          value={formik.values.email}
+          onBlur={formik.handleBlur}
           placeholder="Email Id"
           className="p-4 my-4 w-full bg-gray-800  placeholder:text-gray-500 rounded-md"
         />
+        {formik.touched.email && formik.errors.email ? (
+          <p className="text-sm text-red-700">{formik.errors.email}</p>
+        ) : null}
         <input
+          id="password"
+          name="password"
           type="password"
           placeholder="Password"
+          onChange={formik.handleChange}
+          value={formik.values.password}
+          onBlur={formik.handleBlur}
           className="p-4 my-4 w-full bg-gray-800 placeholder:text-gray-500 rounded-md"
         />
+        {formik.touched.password && formik.errors.password ? (
+          <p className="text-sm text-red-700">{formik.errors.password}</p>
+        ) : null}
+
         {!isSignInForm && (
           <input
+            id="confirmpassword"
+            name="confirmpassword"
             type="password"
+            onChange={formik.handleChange}
+            value={formik.values.confirmpassword}
+            onBlur={formik.handleBlur}
             placeholder="Confirm Password"
             className="p-4 my-4 w-full bg-gray-800 placeholder:text-gray-500 rounded-md"
           />
         )}
-
-        <button className="p-4 my-2 bg-red-700 w-full rounded-md ">
+        {!isSignInForm &&
+        formik.touched.confirmpassword &&
+        formik.errors.confirmpassword ? (
+          <p className="text-sm text-red-700">
+            {formik.errors.confirmpassword}
+          </p>
+        ) : null}
+        <button
+          className="p-4 my-2 bg-red-700 w-full rounded-md "
+          type="submit"
+        >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
         <p
