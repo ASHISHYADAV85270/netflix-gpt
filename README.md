@@ -5,8 +5,9 @@
 - Login Form
 - SignUp Form
 - Authentication Using Firebase
-- Firebase setup
+- Firebase setup and Implementation
 - Deploy Our App for Production
+- Redux Store is Used using userSlice
 
 
 
