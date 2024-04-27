@@ -4,6 +4,9 @@
 - Header
 - Login Form
 - SignUp Form
+- Authentication Using Firebase
+- Firebase setup
+- Deploy Our App for Production
 
 
 

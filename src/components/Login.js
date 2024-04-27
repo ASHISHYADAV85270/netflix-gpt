@@ -1,19 +1,48 @@
 import Header from "./Header";
 import { useState } from "react";
 import { useFormik } from "formik";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
 const Login = () => {
   const [isSignInForm, setSignInForm] = useState(true);
 
   const toggleSignInForm = () => {
     setSignInForm(!isSignInForm);
   };
+
+  /* it will be called if only validate is fine */
+  const handleFormSubmit = ({ email, password }) => {
+    if (!isSignInForm) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode, errorMessage);
+        });
+    } else {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode, errorMessage);
+        });
+    }
+  };
+
+  /*validate for formik */
   const validate = (values) => {
     const errors = {};
-    if (!values.fullname) {
-      errors.fullname = "Required";
-    } else if (values.fullname.length > 20) {
-      errors.fullname = "Must be 20 characters or less";
-    }
 
     if (!values.email) {
       errors.email = "Required";
@@ -21,6 +50,15 @@ const Login = () => {
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
       errors.email = "Invalid email address";
+    }
+
+    if (isSignInForm) {
+      return errors;
+    }
+    if (!values.fullname) {
+      errors.fullname = "Required";
+    } else if (values.fullname.length > 20) {
+      errors.fullname = "Must be 20 characters or less";
     }
 
     if (values.password !== "" && values.password !== values.confirmpassword) {
@@ -38,18 +76,17 @@ const Login = () => {
       fullname: "",
     },
     validate,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
+    onSubmit: handleFormSubmit,
   });
 
   return (
-    <div className="relative flex flex-col items-center justify-center">
+    <div className="relative  flex flex-col items-center justify-center">
       <Header />
-      <div className="bg-red-900">
+      <div className="relative h-full w-full overflow-hidden">
         <img
           src="https://assets.nflxext.com/ffe/siteui/vlv3/9f46b569-aff7-4975-9b8e-3212e4637f16/453ba2a1-6138-4e3c-9a06-b66f9a2832e4/IN-en-20240415-popsignuptwoweeks-perspective_alpha_website_medium.jpg"
           alt="body"
+          className="h-[1040px]"
         />
       </div>
       <form
