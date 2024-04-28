@@ -2,6 +2,7 @@ import Header from "./Header";
 import { useState } from "react";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -9,7 +10,8 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import { addUser } from "../utils/userSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -33,7 +35,9 @@ const Login = () => {
             .then(() => {
               const { uid, displayName, photoURL, email } = auth.currentUser;
               dispatch(addUser({ uid, displayName, photoURL, email }));
+              toast.success("New User Created");
               navigate("/browse");
+              formik.resetForm();
             })
             .catch((error) => {
               const errorCode = error.code;
@@ -43,9 +47,7 @@ const Login = () => {
             });
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode, errorMessage);
+          toast.error("This Email Id Already Exist");
           navigate("/");
         });
     } else {
@@ -53,13 +55,14 @@ const Login = () => {
         .then((userCredential) => {
           const { uid, displayName, photoURL, email } = userCredential.user;
           dispatch(addUser({ uid, displayName, photoURL, email }));
+          toast.success(`Welcome back ${displayName}`);
           navigate("/browse");
+          formik.resetForm();
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode, errorMessage);
+          toast.error("Wrong Password or Email Id");
           navigate("/");
+          formik.resetForm();
         });
     }
   };
@@ -170,6 +173,7 @@ const Login = () => {
             value={formik.values.confirmpassword}
             onBlur={formik.handleBlur}
             placeholder="Confirm Password"
+            autocomplete="current-password"
             className="p-4 my-4 w-full bg-gray-800 placeholder:text-gray-500 rounded-md"
           />
         )}
@@ -195,6 +199,7 @@ const Login = () => {
             : "Already Registered ? Sign In now."}
         </p>
       </form>
+      <ToastContainer />
     </div>
   );
 };
