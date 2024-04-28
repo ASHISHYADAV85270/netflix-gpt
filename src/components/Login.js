@@ -1,28 +1,46 @@
 import Header from "./Header";
 import { useState } from "react";
 import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { addUser } from "../utils/userSlice";
+
 const Login = () => {
   const navigate = useNavigate();
   const [isSignInForm, setSignInForm] = useState(true);
+  const dispatch = useDispatch();
 
   const toggleSignInForm = () => {
     setSignInForm(!isSignInForm);
   };
 
   /* it will be called if only validate is fine */
-  const handleFormSubmit = ({ email, password }) => {
+  const handleFormSubmit = ({ email, password, fullname }) => {
     if (!isSignInForm) {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user);
-          navigate("/browse");
+          updateProfile(user, {
+            displayName: fullname,
+            photoURL: "https://avatars.githubusercontent.com/u/84664285?v=4",
+          })
+            .then(() => {
+              const { uid, displayName, photoURL, email } = auth.currentUser;
+              dispatch(addUser({ uid, displayName, photoURL, email }));
+              navigate("/browse");
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              console.log(errorCode, errorMessage);
+              navigate("/");
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -33,8 +51,8 @@ const Login = () => {
     } else {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          const user = userCredential.user;
-          console.log(user);
+          const { uid, displayName, photoURL, email } = userCredential.user;
+          dispatch(addUser({ uid, displayName, photoURL, email }));
           navigate("/browse");
         })
         .catch((error) => {
@@ -88,11 +106,10 @@ const Login = () => {
   return (
     <div className="relative  flex flex-col items-center justify-center">
       <Header />
-      <div className="relative h-full w-full overflow-hidden">
+      <div className="relative h-screen w-screen overflow-hidden">
         <img
           src="https://assets.nflxext.com/ffe/siteui/vlv3/9f46b569-aff7-4975-9b8e-3212e4637f16/453ba2a1-6138-4e3c-9a06-b66f9a2832e4/IN-en-20240415-popsignuptwoweeks-perspective_alpha_website_medium.jpg"
           alt="body"
-          className="h-[1040px]"
         />
       </div>
       <form

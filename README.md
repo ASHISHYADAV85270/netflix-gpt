@@ -8,6 +8,8 @@
 - Firebase setup and Implementation
 - Deploy Our App for Production
 - Redux Store is Used using userSlice
+- Formik is used for field management
+- Update Profile API call
 
 
 

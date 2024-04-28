@@ -22,8 +22,15 @@ const Body = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const { uid, displayName, email } = user;
-        dispatch(addUser({ uid: uid, displayName: displayName, email: email }));
+        const { uid, displayName, photoURL, email } = user;
+        dispatch(
+          addUser({
+            uid: uid,
+            email: email,
+            photoURL: photoURL,
+            displayName: displayName,
+          })
+        );
       } else {
         dispatch(removeUser());
       }
