@@ -27,7 +27,7 @@ const UserDropdown = () => {
       <div>
         <button
           type="button"
-          className="w-10 h-10  rounded-full overflow-hidden"
+          className="w-10 h-10  overflow-hidden flex items-center justify-center"
           onClick={toggleDropdown}
         >
           <img src={user.photoURL} alt={user.displayName} />

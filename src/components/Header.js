@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import UserDropdown from "../utils/UserDropdown";
 import { useNavigate } from "react-router-dom";
+import { LOGO } from "../utils/constants";
 
 const Header = () => {
   const userdata = useSelector((appStore) => appStore.user);
@@ -12,7 +13,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, displayName, photoURL, email } = user;
         dispatch(
@@ -29,14 +30,12 @@ const Header = () => {
         navigate("/");
       }
     });
+    // unsubscribe will be called when component unmounts
+    return () => unsubscribe();
   }, []);
   return (
     <div className="absolute w-screen top-0 left-0 px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between items-center">
-      <img
-        src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
-        alt="logo"
-        className="w-44"
-      />
+      <img src={LOGO} alt="logo" className="w-44" />
       {userdata && <UserDropdown />}
     </div>
   );

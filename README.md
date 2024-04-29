@@ -10,6 +10,10 @@
 - Redux Store is Used using userSlice
 - Formik is used for field management
 - Update Profile API call
+- Bugfix of Authentication of USER
+- Unsubscribed to the onAuthStateChanged callback
+- Added hardcoded values to the constant file
+
 
 
 

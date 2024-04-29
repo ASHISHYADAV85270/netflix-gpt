@@ -11,6 +11,7 @@ import {
 import { auth } from "../utils/firebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { USER_AVATAR } from "../utils/constants";
 
 const Login = () => {
   const [isSignInForm, setSignInForm] = useState(true);
@@ -28,7 +29,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: fullname,
-            photoURL: "https://avatars.githubusercontent.com/u/84664285?v=4",
+            photoURL: USER_AVATAR,
           })
             .then(() => {
               const { uid, displayName, photoURL, email } = auth.currentUser;
