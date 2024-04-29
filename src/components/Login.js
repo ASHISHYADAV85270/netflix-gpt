@@ -9,12 +9,10 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
-  const navigate = useNavigate();
   const [isSignInForm, setSignInForm] = useState(true);
   const dispatch = useDispatch();
 
@@ -36,19 +34,15 @@ const Login = () => {
               const { uid, displayName, photoURL, email } = auth.currentUser;
               dispatch(addUser({ uid, displayName, photoURL, email }));
               toast.success("New User Created");
-              navigate("/browse");
               formik.resetForm();
             })
             .catch((error) => {
-              const errorCode = error.code;
               const errorMessage = error.message;
-              console.log(errorCode, errorMessage);
-              navigate("/");
+              toast.error(errorMessage);
             });
         })
         .catch((error) => {
           toast.error("This Email Id Already Exist");
-          navigate("/");
         });
     } else {
       signInWithEmailAndPassword(auth, email, password)
@@ -56,12 +50,10 @@ const Login = () => {
           const { uid, displayName, photoURL, email } = userCredential.user;
           dispatch(addUser({ uid, displayName, photoURL, email }));
           toast.success(`Welcome back ${displayName}`);
-          navigate("/browse");
           formik.resetForm();
         })
         .catch((error) => {
           toast.error("Wrong Password or Email Id");
-          navigate("/");
           formik.resetForm();
         });
     }

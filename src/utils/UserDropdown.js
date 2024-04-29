@@ -2,20 +2,19 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { auth } from "./firebase.js";
+import { ToastContainer, toast } from "react-toastify";
 
 const UserDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const user = useSelector((state) => state.user);
-  const navigate = useNavigate();
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        navigate("/");
+        toast.success("Signout Successfully");
       })
       .catch((error) => {
-        navigate("/error");
+        toast.error("Some Error");
       });
   };
 
@@ -77,6 +76,7 @@ const UserDropdown = () => {
           </div>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 };
