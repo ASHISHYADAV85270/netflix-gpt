@@ -13,7 +13,8 @@
 - Bugfix of Authentication of USER
 - Unsubscribed to the onAuthStateChanged callback
 - Added hardcoded values to the constant file
-
+- Registered for TMBD API and Get Access Token
+- Get data from TMBD now Playing movie list
 
 
 
