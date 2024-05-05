@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { LOGO } from "../utils/constants";
 
 const Header = () => {
-  const userdata = useSelector((appStore) => appStore.user);
+  const userdata = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
