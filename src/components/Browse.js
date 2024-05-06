@@ -5,10 +5,10 @@ import SecondaryContainer from "./SecondaryContainer";
 const Browse = () => {
   useNowPlayingMovies();
   return (
-    <div className=" h-screen box-border">
+    <div className=" ">
       <Header />
       <MainContainer />
-      <SecondaryContainer />
+      {/* <SecondaryContainer /> */}
     </div>
   );
 };
