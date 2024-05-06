@@ -178,11 +178,12 @@ const Login = () => {
           </p>
         ) : null}
         <button
-          className="p-4 my-2 bg-red-700 w-full rounded-md "
+          className="p-4 my-2 bg-red-700 w-full rounded-md hover:bg-red-800 text-white font-bold"
           type="submit"
         >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
+
         <p
           className="text-gray-200 py-4 cursor-pointer text-opacity-75 hover:text-opacity-60"
           onClick={toggleSignInForm}
