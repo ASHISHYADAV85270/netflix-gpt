@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { API_OPTIONS } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addNowPlayingMovies } from "../utils/moviesSlice";
@@ -15,6 +15,7 @@ const useNowPlayingMovies = () => {
 
   useEffect(() => {
     getNowPlayingMovies();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 

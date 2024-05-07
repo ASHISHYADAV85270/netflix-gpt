@@ -20,46 +20,6 @@ const Login = () => {
   const toggleSignInForm = () => {
     setSignInForm(!isSignInForm);
   };
-
-  /* it will be called if only validate is fine */
-  const handleFormSubmit = ({ email, password, fullname }) => {
-    if (!isSignInForm) {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          updateProfile(user, {
-            displayName: fullname,
-            photoURL: USER_AVATAR,
-          })
-            .then(() => {
-              const { uid, displayName, photoURL, email } = auth.currentUser;
-              dispatch(addUser({ uid, displayName, photoURL, email }));
-              toast.success("New User Created");
-              formik.resetForm();
-            })
-            .catch((error) => {
-              const errorMessage = error.message;
-              toast.error(errorMessage);
-            });
-        })
-        .catch((error) => {
-          toast.error("This Email Id Already Exist");
-        });
-    } else {
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const { uid, displayName, photoURL, email } = userCredential.user;
-          dispatch(addUser({ uid, displayName, photoURL, email }));
-          toast.success(`Welcome back ${displayName}`);
-          formik.resetForm();
-        })
-        .catch((error) => {
-          toast.error("Wrong Password or Email Id");
-          formik.resetForm();
-        });
-    }
-  };
-
   /*validate for formik */
   const validate = (values) => {
     const errors = {};
@@ -99,17 +59,56 @@ const Login = () => {
     onSubmit: handleFormSubmit,
   });
 
+  /* it will be called if only validate is fine */
+  function handleFormSubmit({ email, password, fullname }) {
+    if (!isSignInForm) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          updateProfile(user, {
+            displayName: fullname,
+            photoURL: USER_AVATAR,
+          })
+            .then(() => {
+              const { uid, displayName, photoURL, email } = auth.currentUser;
+              dispatch(addUser({ uid, displayName, photoURL, email }));
+              toast.success("New User Created");
+            })
+            .catch((error) => {
+              const errorMessage = error.message;
+              toast.error(errorMessage);
+            });
+        })
+        .catch((error) => {
+          toast.error("This Email Id Already Exist");
+        });
+    } else {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const { uid, displayName, photoURL, email } = userCredential.user;
+          dispatch(addUser({ uid, displayName, photoURL, email }));
+          toast.success(`Welcome back ${displayName}`);
+          formik.resetForm();
+        })
+        .catch((error) => {
+          toast.error("Wrong Password or Email Id");
+          formik.resetForm();
+        });
+    }
+  }
+
   return (
-    <div className="relative  flex flex-col items-center justify-center">
+    <div className="flex flex-col justify-center">
       <Header />
-      <div className="relative h-screen w-screen overflow-hidden">
+      <div className="h-screen">
         <img
           src="https://assets.nflxext.com/ffe/siteui/vlv3/9f46b569-aff7-4975-9b8e-3212e4637f16/453ba2a1-6138-4e3c-9a06-b66f9a2832e4/IN-en-20240415-popsignuptwoweeks-perspective_alpha_website_medium.jpg"
           alt="body"
+          className="h-full w-full"
         />
       </div>
       <form
-        className="w-3/12 absolute flex-col bg-black bg-opacity-80 p-12 text-white rounded-md"
+        className="w-3/12 absolute flex-col bg-black bg-opacity-80 p-12 text-white rounded-md self-center"
         onSubmit={formik.handleSubmit}
       >
         <h1 className="font-bold text-3xl">

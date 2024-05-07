@@ -32,9 +32,10 @@ const Header = () => {
     });
     // unsubscribe will be called when component unmounts
     return () => unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div className="absolute w-screen top-0 left-0 px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between items-center">
+    <div className="absolute w-full top-0 left-0 px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between items-center">
       <img src={LOGO} alt="logo" className="w-44" />
       {userdata && <UserDropdown />}
     </div>

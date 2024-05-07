@@ -13,11 +13,12 @@ const useGetMoviesVideos = (movieId) => {
     const filterData = jsonData.results.filter(
       (video) => video.type === "Trailer"
     );
-    const trailer = filterData.length ? filterData[0] : movieVideos[0];
+    const trailer = filterData.length ? filterData[0] : jsonData.results[0];
     dispatch(addTrailerVideo(trailer));
   };
   useEffect(() => {
     getMovieVideos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 

@@ -10,7 +10,7 @@ const VideoBackground = ({ movieId, title }) => {
   }
   const { key: trailerKey } = trailerVideo;
   return (
-    <div className="w-screen h-screen">
+    <div className="h-full">
       <iframe
         src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&enablejsapi=1&rel=0`}
         title={title}
