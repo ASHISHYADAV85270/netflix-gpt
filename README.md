@@ -15,6 +15,9 @@
 - Added hardcoded values to the constant file
 - Registered for TMBD API and Get Access Token
 - Get data from TMBD now Playing movie list
+- Created Custom Hooks for nowPlayingMovie and Trailer
+- Created A movie Slice
+- Updated the Movies List and Trailer Video into the Store 
 
 
 
