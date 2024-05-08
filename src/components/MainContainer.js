@@ -13,7 +13,7 @@ const MainContainer = () => {
   const mainMovie = movies[randomIndex];
   const { original_title, overview, id } = mainMovie;
   return (
-    <div className="h-full bg-red-300">
+    <div className="h-full ">
       <VideoTitle title={original_title} overview={overview} />
       <VideoBackground movieId={id} title={original_title} />
     </div>
