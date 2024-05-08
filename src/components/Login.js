@@ -108,10 +108,10 @@ const Login = () => {
         />
       </div>
       <form
-        className="w-3/12 absolute flex-col bg-black bg-opacity-80 p-12 text-white rounded-md self-center"
+        className="h-screen  min-w-[300px] absolute  p-12  flex-col self-center bg-black bg-opacity-80  text-white rounded-md  sm:h-auto sm:w-3/12 sm:min-w-[450px]"
         onSubmit={formik.handleSubmit}
       >
-        <h1 className="font-bold text-3xl">
+        <h1 className="font-bold text-3xl mt-16 sm:mt-0">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
         {!isSignInForm && (
