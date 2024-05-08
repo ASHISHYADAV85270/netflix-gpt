@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
@@ -40,7 +40,7 @@ const UserDropdown = () => {
 
       {isOpen && (
         <div
-          className="absolute right-0 z-10 mt-2 w-36 sm:w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none opacity-95"
+          className="absolute right-0 z-1 mt-2 w-36 sm:w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none opacity-95"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="menu-button"

@@ -35,7 +35,7 @@ const Header = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div className="absolute w-screen top-0 left-0 px-2 sm:px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between items-center">
+    <div className="z-50 absolute w-screen top-0 left-0 px-2 sm:px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between items-center">
       <img src={LOGO} alt="logo" className="w-24 sm:w-44" />
       {userdata && <UserDropdown />}
     </div>

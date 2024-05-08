@@ -7,7 +7,7 @@ const MainContainer = () => {
   const movies = useSelector((store) => store.movies?.nowPlayingMovies);
   // this is known as early return
   if (!movies) {
-    return;
+    return null;
   }
   const randomIndex = Math.floor(Math.random() * movies.length);
   const mainMovie = movies[randomIndex];

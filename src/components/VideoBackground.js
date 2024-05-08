@@ -12,9 +12,9 @@ const VideoBackground = ({ movieId, title }) => {
   return (
     <div className="h-full ">
       <iframe
-        src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&enablejsapi=1&rel=0`}
+        src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1&mute=1&controls=0&modestbranding=0&showinfo=0&enablejsapi=1&rel=0`}
         title={title}
-        className=" inset-0 w-full h-full aspect-video   pointer-events-none"
+        className="inset-0 w-full h-full aspect-video pointer-events-none"
         allowFullScreen
       ></iframe>
     </div>
