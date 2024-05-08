@@ -3,10 +3,10 @@ import React from "react";
 const VideoTitle = ({ title, overview }) => {
   return (
     <div className="absolute w-full flex flex-col justify-center content-center gap-6 px-4 sm:px-40 text-white aspect-video bg-gradient-to-b from-black">
-      <h1 className="md:mt-7 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">
+      <h1 className="mt-8 md:mt-7 w-2/3  text-lg sm:text-3xl md:text-4xl lg:text-5xl font-bold">
         {title}
       </h1>
-      <p className="hidden sm:block text-sm sm:text-base md:text-lg lg:text-xl w-[30vw]">
+      <p className="  text-sm sm:text-base md:text-lg lg:text-xl w-2/4 truncate sm:whitespace-normal">
         {overview}
       </p>
       <div>

@@ -8,7 +8,7 @@ const SecondaryContainer = () => {
     return;
   }
   return (
-    <div className="flex flex-col gap-6 bg-black">
+    <div className="flex flex-col gap-6 bg-black py-4">
       <MovieList title={"Now Playing"} movies={movies} />
       <MovieList title={"Trending"} movies={movies} />
       <MovieList title={"Upcoming"} movies={movies} />

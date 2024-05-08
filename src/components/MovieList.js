@@ -5,9 +5,9 @@ const MovieList = ({ title, movies }) => {
   console.log(movies);
   return (
     <div className="px-3 ">
-      <h1 className="text-3xl mb-2 text-white ">{title}</h1>
+      <h1 className=" text-2xl sm:text-3xl mb-2 text-white ">{title}</h1>
       <div className="flex overflow-x-scroll">
-        <div className="flex gap-3 ">
+        <div className="flex gap-3  ">
           {movies.map((curr_movie) => {
             return (
               <MovieCard
