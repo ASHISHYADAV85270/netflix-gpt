@@ -17,7 +17,9 @@
 - Get data from TMBD now Playing movie list
 - Created Custom Hooks for nowPlayingMovie and Trailer
 - Created A movie Slice
-- Updated the Movies List and Trailer Video into the Store 
+- Updated the Movies List and Trailer Video into the Store
+- Created Different Types of Movies with a scroll
+- Make Cards 
 
 
 
