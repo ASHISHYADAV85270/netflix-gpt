@@ -21,7 +21,7 @@ const SecondaryContainer = () => {
 
   return (
     <div className="  flex flex-col gap-6 bg-black py-4 ">
-      <div className="  lg:mt-[-310px] lg:z-50">
+      <div className="  lg:mt-[-270px] lg:z-50">
         <MovieList title={"Now Playing"} movies={nowPlayingMovies} />
       </div>
       <MovieList title={"Popular"} movies={popularMovies} />

@@ -7,7 +7,7 @@ const MovieCard = ({ posterPath }) => {
         src={IMG_CDN_URL + posterPath}
         alt="logo"
         className="object-cover w-full h-auto cursor-pointer hover:animate-pulse"
-      />
+      /> 
     </div>
   );
 };

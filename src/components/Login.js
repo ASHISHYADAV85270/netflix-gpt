@@ -11,7 +11,7 @@ import {
 import { auth } from "../utils/firebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { USER_AVATAR } from "../utils/constants";
+import { BG_CDN_URL, USER_AVATAR } from "../utils/constants";
 
 const Login = () => {
   const [isSignInForm, setSignInForm] = useState(true);
@@ -101,11 +101,7 @@ const Login = () => {
     <div className="flex flex-col justify-center">
       <Header />
       <div className="h-screen">
-        <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/9f46b569-aff7-4975-9b8e-3212e4637f16/453ba2a1-6138-4e3c-9a06-b66f9a2832e4/IN-en-20240415-popsignuptwoweeks-perspective_alpha_website_medium.jpg"
-          alt="body"
-          className="h-full w-full"
-        />
+        <img src={BG_CDN_URL} alt="body" className="h-full w-full" />
       </div>
       <form
         className="h-screen  min-w-[300px] absolute  p-12  flex-col self-center bg-black bg-opacity-80  text-white rounded-md  sm:h-auto sm:w-3/12 sm:min-w-[450px]"
