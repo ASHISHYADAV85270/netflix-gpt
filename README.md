@@ -20,6 +20,7 @@
 - Updated the Movies List and Trailer Video into the Store
 - Created Different Types of Movies with a scroll
 - Make Cards 
+- Implemented MultiLanguage Support in Gpt Search Page
 
 
 
